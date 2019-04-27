@@ -16,3 +16,6 @@ Take a picture of a food item. The item is then saved to a database.
 * User Authentication
 * Google's ML Vision API
 * Firebase Real Time Database
+
+### Resources
+* Firebase Image Recognition: https://firebase.google.com/docs/ml-kit/android/label-images
