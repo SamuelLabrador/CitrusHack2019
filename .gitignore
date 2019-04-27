@@ -1,0 +1,7 @@
+build/app/intermediates/transforms/desugar/debug/
+build/app/intermediates/transforms/dexBuilder/debug/
+build/android-profile/
+build/app/outputs/apk/
+build/app/intermediates/incremental/
+build/app/intermediates/transforms/
+.idea/workspace.xml

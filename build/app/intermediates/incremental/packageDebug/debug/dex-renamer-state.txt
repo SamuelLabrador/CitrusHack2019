@@ -1,4 +1,0 @@
-#Sat Apr 27 12:12:36 PDT 2019
-base.0=/home/winsonrbi/CitrusHack2019/build/app/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
