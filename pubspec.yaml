@@ -5,7 +5,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Firebase SDK
+# Firebase SDK
 #  firebase_auth: ^0.8.4+5
 
   firebase_auth: ^0.8.4+5
