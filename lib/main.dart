@@ -50,6 +50,18 @@ class _EntryPointState extends State<EntryPoint> {
                 onNotification: onPageView,
                 child: new Pager(
                   controller: pagerController,
+                  centerWidget:
+                    new ControlsLayer(
+                        offset: offsetRatio,
+                        onTap: () {
+                        playPause();
+                        },
+                        cameraIcon: new CameraIcon(),
+                        onCameraTap: () async {
+                          await flipCamera();
+                          setState(() {});
+                        },
+                    ),
                   leftWidget: new ItemList(
                     amount: 30,
                   ),
@@ -96,18 +108,6 @@ class _EntryPointState extends State<EntryPoint> {
                   ),
                 )
               ),
-
-              new ControlsLayer(
-                offset: offsetRatio,
-                onTap: () {
-                  playPause();
-                },
-                cameraIcon: new CameraIcon(),
-                onCameraTap: () async {
-                  await flipCamera();
-                  setState(() {});
-                },
-              )
             ],
           ),
         )
