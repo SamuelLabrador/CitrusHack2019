@@ -4,19 +4,19 @@ class Pager extends StatelessWidget {
   final PageController controller;
   final Widget leftWidget;
   final Widget rightWidget;
-
-  Pager({this.controller, this.leftWidget, this.rightWidget});
+  final Widget centerWidget;
+  Pager({this.controller, this.centerWidget, this.leftWidget, this.rightWidget});
 
   Iterable<Widget> buildPages() {
     final List<Widget> pages = <Widget>[];
 
-    pages.add(_contentWidget(Colors.white, leftWidget));
-    pages.add(_contentWidget(Colors.white));
-    pages.add(_contentWidget(Colors.white, rightWidget));
+    pages.add(_contentWidget(Colors.white, Colors.white, leftWidget));
+    pages.add(_contentWidget(Colors.white,Colors.transparent, centerWidget));
+    pages.add(_contentWidget(Colors.white, Colors.white, rightWidget));
     return pages;
   }
 
-  _contentWidget(Color color, [Widget page]) {
+  _contentWidget(Color color,Color background, [Widget page]) {
     var widgets = <Widget>[];
     widgets.add(new Opacity(
       opacity: 0.0,
@@ -30,7 +30,7 @@ class Pager extends StatelessWidget {
           margin: new EdgeInsets.fromLTRB(0.0, 80.0, 0.0, 0.0),
           child: page,
           decoration: new ShapeDecoration(
-            color: Colors.white,
+            color: background,
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.only(
                 topLeft: new Radius.circular(10.0),
