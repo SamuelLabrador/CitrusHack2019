@@ -54,7 +54,10 @@ class _EntryPointState extends State<EntryPoint> {
                     new ControlsLayer(
                         offset: offsetRatio,
                         onTap: () {
-                        playPause();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => cameraDecision()),
+                          );
                         },
                         cameraIcon: new CameraIcon(),
                         onCameraTap: () async {
@@ -139,6 +142,8 @@ class ItemList extends StatelessWidget {
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
-      runApp(new EntryPoint());
+      runApp(MaterialApp(
+        home: EntryPoint(),
+      ));
     });
 }

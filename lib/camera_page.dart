@@ -30,6 +30,16 @@ void playPause() {
   }
 }
 
+class cameraDecision extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(),
+      body:
+        Text("test")
+    );
+  }
+}
 Future<Null> _restartCamera(CameraDescription description) async {
     final CameraController tempController = _controller;
     _controller = null;
