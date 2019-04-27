@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config=":camera"><source path="/home/winsonrbi/CitrusHack2019/build/camera/intermediates/bundles/debug/assets"/></dataSet><dataSet config="main"><source path="/home/winsonrbi/CitrusHack2019/android/app/src/main/assets"/><source path="/home/winsonrbi/CitrusHack2019/build/app/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/winsonrbi/CitrusHack2019/android/app/src/debug/assets"/></dataSet></merger>
