@@ -8,6 +8,9 @@ build/
 gen/
 out/
 
+# Idea Files
+.idea/
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
