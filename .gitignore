@@ -5,3 +5,4 @@ build/app/outputs/apk/
 build/app/intermediates/incremental/
 build/app/intermediates/transforms/
 .idea/workspace.xml
+build/
