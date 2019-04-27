@@ -53,7 +53,47 @@ class _EntryPointState extends State<EntryPoint> {
                   leftWidget: new ItemList(
                     amount: 30,
                   ),
-                  rightWidget: new Text('right'),
+                  rightWidget: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:[
+                        Container(
+                          padding: const EdgeInsets.only(top:20.0),
+                          child:
+                            ButtonTheme(
+                                minWidth: 400,
+                                height: 50,
+                                child: new RaisedButton(
+                                    onPressed: null,
+                                    child:
+                                    Text(
+                                        'Settings',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        Container(
+                            padding: EdgeInsets.only(top:10),
+                            child:
+                              ButtonTheme(
+                                  minWidth: 400,
+                                  height: 50,
+                                  child: new RaisedButton(
+                                      onPressed: null,
+                                      child:
+                                      Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          )
+                                      )
+                                  )
+                              )
+                        )
+                      ]
+                  ),
                 )
               ),
 

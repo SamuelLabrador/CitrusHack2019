@@ -1,6 +1,22 @@
 {
     "logs": [
         {
+            "outputFile": "/home/winsonrbi/CitrusHack2019/build/app/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/winsonrbi/CitrusHack2019/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "347"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/home/sam/development/flutter_snapchat/build/app/intermediates/res/merged/debug/values_values.arsc.flat",
             "map": [
                 {
