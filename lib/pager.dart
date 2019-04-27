@@ -11,7 +11,7 @@ class Pager extends StatelessWidget {
     final List<Widget> pages = <Widget>[];
 
     pages.add(_contentWidget(Colors.white, Colors.white, leftWidget));
-    pages.add(_contentWidget(Colors.transparent,Colors.transparent, centerWidget));
+    pages.add(centerWidget);
     pages.add(_contentWidget(Colors.white, Colors.white, rightWidget));
     return pages;
   }
