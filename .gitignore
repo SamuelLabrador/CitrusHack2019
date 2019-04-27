@@ -23,3 +23,6 @@ out/
 
 # Log Files
 *.log
+
+.flutter-plugins
+.packages
