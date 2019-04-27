@@ -1,17 +1,26 @@
-# DIET APP -- Citrus Hack 2019
+# Fluter Snapchat
 
-### Developers: 
+A proof of concept on how to get the Snapchat-style swiping functionality using flutter.
 
-* Miguel Andrade  
-* Winson Bi  
-* Samuel Labrador  
+More on how it's done here https://medium.com/@kr1uz/building-a-snapchat-like-interface-in-flutter-aafb7e59c8a5
 
-### Features
-* Google API  
-* ML identify food item  
-* API service to get 
-* Firebase Database
 
-### Preface
-This app allows users to take pictures of their food and save the data based on the food. This allows users to keep track of what they've eaten.
 
+![preview](assets/preview.gif)
+
+This project includes:
+- a working camera
+- 'play/pause' button, instead of 'take picture'
+- the 'color shading' animation that happens when a user swipes
+- 'flip camera' button
+- lock screen orientation
+
+I've only ran this on Android. I'm not sure if it works on iOS.
+
+
+## Getting Started
+
+```
+flutter packages get
+flutter run
+```
