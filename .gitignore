@@ -24,5 +24,5 @@ out/
 # Log Files
 *.log
 
-.flutter-plugins
-.packages
+.flutter-plugins/
+.packages/
