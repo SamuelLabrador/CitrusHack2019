@@ -1,2 +1,2 @@
-build/app/intermediates/debug
-build/app/dexBuilder/debug
+build/app/intermediates/transforms/desugar/debug/
+build/app/intermediates/transforms/dexBuilder/debug/
