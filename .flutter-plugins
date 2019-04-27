@@ -1,4 +1,5 @@
 camera=/home/sam/development/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.1.2/
+firebase_auth=/home/sam/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.8.4+5/
 firebase_core=/home/sam/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.3.4/
 firebase_database=/home/sam/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-2.0.3/
 firebase_ml_vision=/home/sam/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_ml_vision-0.7.0+1/
