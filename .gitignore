@@ -1,8 +1,22 @@
-build/app/intermediates/transforms/desugar/debug/
-build/app/intermediates/transforms/dexBuilder/debug/
-build/android-profile/
-build/app/outputs/apk/
-build/app/intermediates/incremental/
-build/app/intermediates/transforms/
-.idea/workspace.xml
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Generated Files
 build/
+gen/
+out/
+
+# IntelliJ
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+
+# Log Files
+*.log
