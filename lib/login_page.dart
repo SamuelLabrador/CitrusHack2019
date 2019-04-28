@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
-
+import 'main.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn();
 final FirebaseAuth _auth = FirebaseAuth.instance;
+
+String _password = '';
 
 enum FormMode { LOGIN, SIGNUP }
 
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage>{
     return new Scaffold(
       body: Stack(
         children: <Widget>[
-          _showBody(),
+          _showBody(context),
           _showCircularProgress(),
         ],
       ),
@@ -52,7 +54,7 @@ Widget _showLogo() {
   );
 }
 
-Widget _showBody(){
+Widget _showBody(BuildContext context){
   return new Container(
       padding: EdgeInsets.all(16.0),
       child: new Form(
@@ -62,7 +64,7 @@ Widget _showBody(){
             _showTitle(),
             _showEmailInput(),
             _showPasswordInput(),
-            _showButton()
+            _showButton(context)
           ],
         ),
       ));
@@ -120,21 +122,21 @@ Widget _showPasswordInput() {
   );
 }
 
-Widget _showButton() {
+Widget _showButton(BuildContext context) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new FloatingActionButton.extended(
         icon: Image.asset('assets/google_g_logo.png', height: 24.0),
         label: const Text('Sign in with Google'),
+        onPressed: () async{
+          validate(context);
+          },
       )
   );
 }
 
-Widget _attemptSignIn(){
 
-}
-
-Future<FirebaseUser> _handleSignIn() async {
+Future<FirebaseUser> validate(BuildContext context) async {
   final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
   final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
@@ -145,5 +147,11 @@ Future<FirebaseUser> _handleSignIn() async {
 
   final FirebaseUser user = await _auth.signInWithCredential(credential);
   print("signed in " + user.displayName);
-  return user;
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => new EntryPoint(),
+    ),
+  );
 }
