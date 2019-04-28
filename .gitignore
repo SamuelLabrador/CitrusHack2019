@@ -27,3 +27,6 @@ out/
 
 # Log Files
 *.log
+
+# Pubspec lock
+pubspec.lock
