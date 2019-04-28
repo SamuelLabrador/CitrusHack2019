@@ -86,6 +86,7 @@ Future<Null> labelImage(FirebaseVisionImage image) async{
      for(var i = 0; i < labels.length; i++){
        if (labels[i].text.toLowerCase() == key.toString()) {
         var newEntry = reference.child('history').push();
+//        print(labels[i]);
         newEntry.update({
           "food" : key.toString(),
           "date" : new DateTime.now().toString(),
