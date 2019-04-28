@@ -3,6 +3,10 @@
 *.ap_
 *.aab
 
+# Flutter packages
+.flutter-plugins
+.packages
+
 # Generated Files
 build/
 gen/
@@ -23,6 +27,3 @@ out/
 
 # Log Files
 *.log
-
-.flutter-plugins/
-.packages/
