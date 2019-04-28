@@ -66,7 +66,7 @@ class cameraDecision extends StatelessWidget{
 
 
     return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
+      appBar: AppBar(title: Text('Image Preview')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image
       body: Image.file(File(imagePath)),
@@ -81,13 +81,13 @@ Future<Null> labelImage(FirebaseVisionImage image, BuildContext context) async{
 //  FirebaseDatabase database = new FirebaseDatabase();
   var reference = FirebaseDatabase.instance.reference();
   reference.child('food').once().then((DataSnapshot snapshot){
-
+  var flag = false;
     Map<dynamic, dynamic> values = snapshot.value;
     values.forEach((key, values) {
      for(var i = 0; i < labels.length; i++){
        if (labels[i].text.toLowerCase() == key.toString()) {
         var newEntry = reference.child('history').push();
-//        print(labels[i]);
+
         newEntry.update({
           "food" : key.toString(),
           "date" : new DateTime.now().toString(),
@@ -96,11 +96,15 @@ Future<Null> labelImage(FirebaseVisionImage image, BuildContext context) async{
           "fat": values["fat"],
           "protein" : values["protein"]
         });
-        _showDialog(context, key.toString() + " identified!");
+        _showGoodDialog(context, key.toString() + " identified!");
 //        print('updating');
+       flag = true;
        }
      }
     });
+    if (flag == false){
+      _showBadDialog(context, "Could not identify item!");
+    }
   });
 
 }
@@ -212,8 +216,31 @@ class CameraIcon extends StatelessWidget {
   }
 }
 
+void _showBadDialog(BuildContext context, String message) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Item not saved"),
+        content: new Text(message),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 // user defined function
-void _showDialog(BuildContext context, String message) {
+void _showGoodDialog(BuildContext context, String message) {
   // flutter defined function
   showDialog(
     context: context,
