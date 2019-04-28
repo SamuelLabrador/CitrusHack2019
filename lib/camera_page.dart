@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' show join;
 
+import 'mlkit.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -61,7 +62,12 @@ class cameraDecision extends StatelessWidget{
       appBar: AppBar(title: Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image
-      body: Image.file(File(imagePath)),
+      body: Column(
+        children: [
+          Image.file(File(imagePath)),
+          itemData(File(imagePath))
+        ]
+      )
     );
   }
 }
