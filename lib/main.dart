@@ -153,6 +153,10 @@ class ItemList extends StatelessWidget {
             }
           }
           );
+          var totalCalories = 0;
+          for(int i = 0; i < calories.length;i++){
+            totalCalories = totalCalories + calories.elementAt(i);
+          }
           return snap.data.snapshot.value == null
               ? SizedBox()
               : ListView.builder(
@@ -163,17 +167,21 @@ class ItemList extends StatelessWidget {
 
             itemBuilder: (context, index) {
 
-              return Row(
-                children:[
-                  Container(
-                      padding: const EdgeInsets.all(10.0),
-                      color: Colors.blueGrey,
-                      child:
-                      Text(item.elementAt(index)+"Calories: "+ calories.elementAt(index).toString()+ " Fat: "+fat.elementAt(index).toString()+" Carbs: "+ carbs.elementAt(index).toString()+ " Protein: " + protein.elementAt(index).toString(),
-                        style: TextStyle(fontSize: 20.0,)
+              return Container(
+                  padding: const EdgeInsets.only(top:10.0,left:20.0,right:20.0),
+                child:
+                Row(
+                    children:[
+                      Container(
+                          width: 350,
+                          color: Colors.grey,
+                          child:
+                          Text(item.elementAt(index)+" Calories: "+ calories.elementAt(index).toString()+ " Fat: "+fat.elementAt(index).toString()+" Carbs: "+ carbs.elementAt(index).toString()+ " Protein: " + protein.elementAt(index).toString(),
+                              style: TextStyle(fontSize: 20.0,color:Colors.white)
+                          )
                       )
-                  )
-                ]
+                    ]
+                )
               );
 
             },
