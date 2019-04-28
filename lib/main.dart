@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:ui';
+import 'dart:async';
+import 'dart:io';
 
 import 'camera_page.dart';
 import 'pager.dart';
@@ -53,11 +56,8 @@ class _EntryPointState extends State<EntryPoint> {
                   centerWidget:
                     new ControlsLayer(
                         offset: offsetRatio,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => cameraDecision()),
-                          );
+                        onTap: () async{
+                          takePic(context);
                         },
                         cameraIcon: new CameraIcon(),
                         onCameraTap: () async {

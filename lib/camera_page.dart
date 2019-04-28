@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' show join;
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -20,23 +23,45 @@ IconData _cameraLensIcon(CameraLensDirection currentDirection) {
   throw new ArgumentError('Unknown lens direction');
 }
 
-void playPause() {
-  if (_controller != null) {
-    if (_controller.value.isStarted) {
-      _controller.stop();
-    } else {
-      _controller.start();
-    }
-  }
-}
+void takePic(BuildContext context) async{
+  try {
+    // Construct the path where the image should be saved using the path
+    // package.
+    final path = join(
+      // In this example, store the picture in the temp directory. Find
+      // the temp directory using the `path_provider` plugin.
+        (await getTemporaryDirectory()).path,
+      '${DateTime.now()}.png',
+    );
 
+  // Attempt to take a picture and log where it's been saved
+    await _controller.takePicture(path);
+
+  // If the picture was taken, display it on a new screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => cameraDecision(imagePath: path),
+      ),
+    );
+  } catch (e) {
+  // If an error occurs, log the error to the console.
+  print(e);
+  }
+
+}
 class cameraDecision extends StatelessWidget{
+  final String imagePath;
+
+  cameraDecision({Key key, this.imagePath}) : super(key: key);
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body:
-        Text("test")
+      appBar: AppBar(title: Text('Display the Picture')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image
+      body: Image.file(File(imagePath)),
     );
   }
 }
@@ -127,7 +152,7 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
     var screenDimension = MediaQuery.of(context).size;
     final List<Widget> columnChildren = <Widget>[];
 
-    if (_controller != null && _controller.value.initialized) {
+    if (_controller != null && _controller.value.isInitialized) {
       columnChildren.add(new Expanded(
         child: new FittedBox(
           fit: BoxFit.fitHeight,
@@ -150,26 +175,6 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
 
     return new Column(
       children: columnChildren,
-    );
-  }
-
-  Widget playPauseButton() {
-    return new Padding(
-      padding: const EdgeInsets.only(top: 25.0),
-      child: new FlatButton(
-        onPressed: () {
-          setState(() {
-            if (_controller.value.isStarted) {
-              _controller.stop();
-            } else {
-              _controller.start();
-            }
-          });
-        },
-        child: new Icon(
-          _controller.value.isStarted ? Icons.pause : Icons.play_arrow
-        ),
-      ),
     );
   }
 }
