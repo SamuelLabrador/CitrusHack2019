@@ -157,7 +157,7 @@ class ItemList extends StatelessWidget {
               ? SizedBox()
               : ListView.builder(
 
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
 
             itemCount: item.length,
 
