@@ -5,7 +5,7 @@ import 'package:path/path.dart' show join;
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 List<CameraDescription> _cameras;
 CameraController _controller;
@@ -52,11 +52,18 @@ void takePic(BuildContext context) async{
 }
 class cameraDecision extends StatelessWidget{
   final String imagePath;
-
   cameraDecision({Key key, this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(imagePath);
+    final File imageFile = File(imagePath);
+    print('image file instantiated!');
+    final FirebaseVisionImage vis_image = FirebaseVisionImage.fromFile(imageFile);
+    print('vis_image instantiated!');
+    labelImage(vis_image);
+
+
     return Scaffold(
       appBar: AppBar(title: Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
@@ -65,6 +72,20 @@ class cameraDecision extends StatelessWidget{
     );
   }
 }
+
+Future<Null> labelImage(FirebaseVisionImage image) async{
+  print('label Image called');
+  final ImageLabeler labeler = FirebaseVision.instance.cloudImageLabeler();
+  print('labeler initialized');
+  final List<ImageLabel> labels = await labeler.processImage(image);
+  print('labels: ');
+  print(labels);
+  for(var i = 0; i < labels.length; i++){
+    print(labels[i].text);
+  }
+}
+
+
 Future<Null> _restartCamera(CameraDescription description) async {
     final CameraController tempController = _controller;
     _controller = null;
