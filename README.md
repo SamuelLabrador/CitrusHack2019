@@ -1,8 +1,7 @@
 # Flutter Diet App 
 
 ### Developers
-* Miguel Andrade  
-* Winson Bi  
+* Winson Bi
 * Samuel Labrador  
 
 ### Development Dependencies

@@ -6,6 +6,8 @@ import 'package:path/path.dart' show join;
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 List<CameraDescription> _cameras;
 CameraController _controller;
@@ -58,9 +60,7 @@ class cameraDecision extends StatelessWidget{
   Widget build(BuildContext context) {
     print(imagePath);
     final File imageFile = File(imagePath);
-    print('image file instantiated!');
     final FirebaseVisionImage vis_image = FirebaseVisionImage.fromFile(imageFile);
-    print('vis_image instantiated!');
     labelImage(vis_image);
 
 
@@ -74,15 +74,41 @@ class cameraDecision extends StatelessWidget{
 }
 
 Future<Null> labelImage(FirebaseVisionImage image) async{
-  print('label Image called');
   final ImageLabeler labeler = FirebaseVision.instance.cloudImageLabeler();
-  print('labeler initialized');
   final List<ImageLabel> labels = await labeler.processImage(image);
-  print('labels: ');
-  print(labels);
-  for(var i = 0; i < labels.length; i++){
-    print(labels[i].text);
-  }
+
+//  FirebaseDatabase database = new FirebaseDatabase();
+  var reference = FirebaseDatabase.instance.reference();
+  reference.child('food').once().then((DataSnapshot snapshot){
+
+    Map<dynamic, dynamic> values = snapshot.value;
+    values.forEach((key, values) {
+     for(var i = 0; i < labels.length; i++){
+       if (labels[i].text.toLowerCase() == key.toString()) {
+        var newEntry = reference.child('history').push();
+//        newEntry.update(
+//          {
+//            'timestamp': new DateTime.now().millisecondsSinceEpoch;
+//            'food':
+//          }
+//        )
+       }
+     }
+
+    });
+  });
+
+
+//      .reference()
+//      .child('food')
+//      .orderByChild('name')
+//      .equalTo('apple');
+
+//  print(reference.path);
+//  for(var i =0; i < q.length; i++){
+//    print(q[i]);
+//  }
+
 }
 
 
