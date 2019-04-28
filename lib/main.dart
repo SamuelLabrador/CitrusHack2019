@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'dart:ui';
 import 'dart:async';
 import 'dart:io';
@@ -65,9 +66,7 @@ class _EntryPointState extends State<EntryPoint> {
                           setState(() {});
                         },
                     ),
-                  leftWidget: new ItemList(
-                    amount: 30,
-                  ),
+                  leftWidget: new ItemList(),
                   rightWidget: new Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children:[
@@ -120,24 +119,66 @@ class _EntryPointState extends State<EntryPoint> {
 }
 
 class ItemList extends StatelessWidget {
-  final int amount;
 
-  ItemList({this.amount});
+  ItemList();
 
   @override
   Widget build(BuildContext context) {
-    var children = <Widget>[];
-    for (int i = 0; i < amount; i++) {
-      children.add(new ListTile(
-        title: new Text('tile $i'),
-      ));
-    }
+    var reference = FirebaseDatabase.instance.reference();
+    var targetref = reference.child('history').orderByChild('date');
 
-    return new ListView(
-      children: children,
+    return StreamBuilder(
+      stream: targetref.onValue,
+      builder: (context, snap){
+        if (snap.hasData && !snap.hasError && snap.data.snapshot.value!=null){
+          //taking the data snapshot.
+          DataSnapshot snapshot = snap.data.snapshot;
+          List item=[];
+          Map<dynamic, dynamic> values= snapshot.value;
+          values.forEach((keys,values){
+            if(values!=null){
+              item.add(values["food"]);
+            }
+          }
+          );
+          return snap.data.snapshot.value == null
+              ? SizedBox()
+              : ListView.builder(
+
+            scrollDirection: Axis.horizontal,
+
+            itemCount: item.length,
+
+            itemBuilder: (context, index) {
+
+              return Column(
+                children:[
+                  Container(
+                      padding: const EdgeInsets.all(10.0),
+                      color: Colors.blueGrey,
+                      child:
+                      Text(item.elementAt(index),
+                        style: TextStyle(fontSize: 20.0,)
+                      )
+                  )
+                ]
+              );
+
+            },
+
+          );
+        }
+        else {
+
+          return   Center(child: CircularProgressIndicator());
+
+        }
+      },
     );
   }
 }
+
+
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

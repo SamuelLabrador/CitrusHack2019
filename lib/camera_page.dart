@@ -25,6 +25,7 @@ IconData _cameraLensIcon(CameraLensDirection currentDirection) {
   throw new ArgumentError('Unknown lens direction');
 }
 
+
 void takePic(BuildContext context) async{
   try {
     // Construct the path where the image should be saved using the path
@@ -98,20 +99,82 @@ Future<Null> labelImage(FirebaseVisionImage image) async{
     });
   });
 
-
-//      .reference()
-//      .child('food')
-//      .orderByChild('name')
-//      .equalTo('apple');
-
-//  print(reference.path);
-//  for(var i =0; i < q.length; i++){
-//    print(q[i]);
-//  }
-
 }
+class historyWidget extends StatelessWidget {
+  final targetMap = <String>{};
+  var calMap = Map();
+  var fatMap = Map();
+  var carbMap = Map();
+  var proteinMap = Map();
+
+  var totalProtein = 0;
+  var totalFat = 0;
+  var totalCarbs = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    var reference = FirebaseDatabase.instance.reference();
+    reference.child('history').once().then((DataSnapshot snapshot){
+
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        targetMap.add(values["food"]);
+        print(targetMap.length);
+      });
+    });
+  print(targetMap.length);
+  var children = <Widget>[];
+  for(int i=0; i< targetMap.length; i++){
+  children.add(new ListTile(
+  title: new Text(targetMap.elementAt(i))
+  ));
+  }
+  return new ListView(
+  children: children,
+  );
+  }
+
+  readProtein() {
+    var reference = FirebaseDatabase.instance.reference();
+    reference.child('food').once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        this.proteinMap[values["food"]] = values["Protein"];
+      });
+    });
+  }
+
+  readCarbs() {
+    var reference = FirebaseDatabase.instance.reference();
+    reference.child('food').once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        this.carbMap[values["food"]] = values["carbs"];
+      });
+    });
+  }
+
+  readFat() {
+    var reference = FirebaseDatabase.instance.reference();
+    reference.child('food').once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        this.fatMap[values["food"]] = values["fat"];
+      });
+    });
+  }
 
 
+  readCals() {
+    var reference = FirebaseDatabase.instance.reference();
+    reference.child('food').once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        this.calMap[values["food"]] = values["calories"];
+      });
+    });
+  }
+}
 Future<Null> _restartCamera(CameraDescription description) async {
     final CameraController tempController = _controller;
     _controller = null;
