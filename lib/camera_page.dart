@@ -71,6 +71,7 @@ Future<Null> _restartCamera(CameraDescription description) async {
     await tempController?.dispose();
     _controller = new CameraController(description, ResolutionPreset.high);
     await _controller.initialize();
+
 }
 
 Future<Null> flipCamera() async {
@@ -115,7 +116,8 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
 
     availableCameras().then((cams) {
       _cameras = cams;
-      _controller = new CameraController(_cameras[1], ResolutionPreset.high);
+//      _cameras[1].lensDirection = CameraLensDirection.back;
+      _controller = new CameraController(_cameras[0], ResolutionPreset.high);
       _controller.initialize()
         .then((_) {
           if (!mounted) {
@@ -124,6 +126,7 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
           setState(() {});
         });
     });
+
   }
 
   @override

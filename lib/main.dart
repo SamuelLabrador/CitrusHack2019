@@ -44,7 +44,6 @@ class _EntryPointState extends State<EntryPoint> {
             children: <Widget>[
 
               new CameraHome(),
-
               new Shade(
                 opacity: offsetRatio,
                 isLeft: offsetFromOne > 0,
@@ -144,7 +143,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
       runApp(MaterialApp(
-        home: new LoginPage() //EntryPoint(),
+        home: new EntryPoint(),
       ));
     });
 }
