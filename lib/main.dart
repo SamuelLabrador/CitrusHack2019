@@ -143,6 +143,7 @@ class ItemList extends StatelessWidget {
           Map<dynamic, dynamic> values= snapshot.value;
           values.forEach((keys,values){
             if(values!=null){
+              print(item.length);
               item.add(values["food"]);
               fat.add(values["fat"]);
               calories.add(values["calories"]);
@@ -162,13 +163,13 @@ class ItemList extends StatelessWidget {
 
             itemBuilder: (context, index) {
 
-              return Column(
+              return Row(
                 children:[
                   Container(
                       padding: const EdgeInsets.all(10.0),
                       color: Colors.blueGrey,
                       child:
-                      Text(item.elementAt(index)+"Calories: "+ calories.elementAt(index).toString()+ " Fat: "+fat.elementAt(index).toString()+" Carbs: "+ carbs.elementAt(index).toString()+ "Protein: " + protein.elementAt(index),
+                      Text(item.elementAt(index)+"Calories: "+ calories.elementAt(index).toString()+ " Fat: "+fat.elementAt(index).toString()+" Carbs: "+ carbs.elementAt(index).toString()+ " Protein: " + protein.elementAt(index).toString(),
                         style: TextStyle(fontSize: 20.0,)
                       )
                   )
