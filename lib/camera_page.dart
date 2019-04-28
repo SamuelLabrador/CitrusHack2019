@@ -91,6 +91,10 @@ Future<Null> labelImage(FirebaseVisionImage image) async{
         newEntry.update({
           "food" : key.toString(),
           "date" : new DateTime.now().toString(),
+          "calories" : values["calories"],
+          "carbs" : values["carbs"],
+          "fat": values["fat"],
+          "protein" : values["protein"]
         });
         print('updating');
        }

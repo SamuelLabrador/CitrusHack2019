@@ -127,6 +127,7 @@ class ItemList extends StatelessWidget {
     var reference = FirebaseDatabase.instance.reference();
     var targetref = reference.child('history').orderByChild('date');
 
+
     return StreamBuilder(
       stream: targetref.onValue,
       builder: (context, snap){
@@ -134,10 +135,20 @@ class ItemList extends StatelessWidget {
           //taking the data snapshot.
           DataSnapshot snapshot = snap.data.snapshot;
           List item=[];
+          List fat=[];
+          List calories=[];
+          List carbs= [];
+          List protein = [];
+
           Map<dynamic, dynamic> values= snapshot.value;
           values.forEach((keys,values){
             if(values!=null){
               item.add(values["food"]);
+              fat.add(values["fat"]);
+              calories.add(values["calories"]);
+              carbs.add(values["carbs"]);
+              protein.add(values["protein"]);
+
             }
           }
           );
@@ -157,7 +168,7 @@ class ItemList extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       color: Colors.blueGrey,
                       child:
-                      Text(item.elementAt(index),
+                      Text(item.elementAt(index)+"Calories: "+ calories.elementAt(index).toString()+ " Fat: "+fat.elementAt(index).toString()+" Carbs: "+ carbs.elementAt(index).toString()+ "Protein: " + protein.elementAt(index),
                         style: TextStyle(fontSize: 20.0,)
                       )
                   )
