@@ -62,7 +62,7 @@ class cameraDecision extends StatelessWidget{
     print(imagePath);
     final File imageFile = File(imagePath);
     final FirebaseVisionImage vis_image = FirebaseVisionImage.fromFile(imageFile);
-    labelImage(vis_image);
+    labelImage(vis_image, context);
 
 
     return Scaffold(
@@ -74,7 +74,7 @@ class cameraDecision extends StatelessWidget{
   }
 }
 
-Future<Null> labelImage(FirebaseVisionImage image) async{
+Future<Null> labelImage(FirebaseVisionImage image, BuildContext context) async{
   final ImageLabeler labeler = FirebaseVision.instance.cloudImageLabeler();
   final List<ImageLabel> labels = await labeler.processImage(image);
 
@@ -96,7 +96,8 @@ Future<Null> labelImage(FirebaseVisionImage image) async{
           "fat": values["fat"],
           "protein" : values["protein"]
         });
-        print('updating');
+        _showDialog(context, key.toString() + " identified!");
+//        print('updating');
        }
      }
     });
@@ -211,6 +212,30 @@ class CameraIcon extends StatelessWidget {
   }
 }
 
+// user defined function
+void _showDialog(BuildContext context, String message) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Item Tracked!"),
+        content: new Text(message),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class CameraHome extends StatefulWidget {
   @override
   _CameraHomeState createState() => new _CameraHomeState();
@@ -294,3 +319,4 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
     );
   }
 }
+
