@@ -3,6 +3,10 @@
 *.ap_
 *.aab
 
+# Flutter packages
+.flutter-plugins
+.packages
+
 # Generated Files
 build/
 gen/
@@ -23,3 +27,6 @@ out/
 
 # Log Files
 *.log
+
+# Pubspec lock
+pubspec.lock

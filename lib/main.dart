@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'camera_page.dart';
+import 'login_page.dart';
 import 'pager.dart';
 import 'circle_button.dart';
 import 'shade.dart';
@@ -143,7 +144,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
       runApp(MaterialApp(
-        home: EntryPoint(),
+        home: new LoginPage() //EntryPoint(),
       ));
     });
 }
