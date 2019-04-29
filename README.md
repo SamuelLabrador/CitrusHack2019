@@ -31,3 +31,6 @@ Take a picture of a food item. The item is then saved to a database. You can tra
 
 ### Resources
 * Firebase Image Recognition: https://firebase.google.com/docs/ml-kit/android/label-images
+
+### To-Do
+* Refactor  
